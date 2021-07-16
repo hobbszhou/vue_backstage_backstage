@@ -1,8 +1,11 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 import Home from '../components/Home.vue'
 import Login from '../components/Login.vue'
-Vue.use(VueRouter)
+import Welcome from '../components/Welcome.vue'
+import Users from '../components/User.vue'
+import Rights from '../components/Rights.vue'
+Vue.use(Router)
 
 // const routes = [
 //   {
@@ -20,25 +23,39 @@ Vue.use(VueRouter)
 //   }
 // ]
 
-// const router = new VueRouter({
+// const router = new Router({
 //   routes: [
 
 //   ]
 // })
 
 // export default router
-export default new VueRouter({
+// export default new Router({
+//   routes: [
+//     { path: '/', redirect: '/login' },
+//     { path: '/login', component: Login },
+//     {
+//       path: '/home',
+//       component: Home,
+//       redirect: '/welcome',
+//       children: [{ path: 'welcome', component: Welcome }]
+//     }
+//   ]
+// })
+const router = new Router({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
-    { path: '/home', component: Home }
-  ]
-})
-const router = new VueRouter({
-  routes: [
-    { path: '/', redirect: '/login' },
-    { path: '/login', component: Login },
-    { path: '/home', component: Home }
+    {
+      path: '/home',
+      component: Home,
+      redirect: '/welcome',
+      children: [
+        { path: '/welcome', component: Welcome },
+        { path: '/users', component: Users },
+        { path: '/rights', component: Rights }
+      ]
+    }
   ]
 })
 // 挂载路由守卫，发送请求之前都会经过守卫
@@ -55,3 +72,4 @@ router.beforeEach((to, from, next) => {
   // 否则路由放行
   next()
 })
+export default router
