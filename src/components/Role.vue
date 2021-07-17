@@ -129,7 +129,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       data: [
         {
@@ -211,12 +211,12 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     this.getRoleList()
   },
   methods: {
     // 通过递归的形式，获取角色下所有三级权限的id，并保存到 defKeys 数组中
-    getLeafKeys (node, arr) {
+    getLeafKeys(node, arr) {
       // 如果当前 node 节点不包含 children 属性，则是三级节点
       if (!node.children) {
         return arr.push(node.id)
@@ -225,11 +225,11 @@ export default {
       node.children.forEach(item => this.getLeafKeys(item, arr))
     },
     // 监听分配权限对话框的关闭事件
-    setRightDialogClosed () {
+    setRightDialogClosed() {
       this.defKeys = []
     },
     // 点击按钮，分配角色
-    async saveRoleInfo () {
+    async saveRoleInfo() {
       const keys = [
         ...this.$refs.treeRef.getCheckedKeys(),
         ...this.$refs.treeRef.getHalfCheckedKeys()
@@ -251,7 +251,7 @@ export default {
       this.setRoleDialogVisible = false
     },
     // 展示分配角色的对话框
-    async setRole (role) {
+    async setRole(role) {
       this.roleId = role.id
       console.log('333---', this.roleId)
 
@@ -266,7 +266,7 @@ export default {
       this.setRoleDialogVisible = true
     },
     // 根据Id删除对应的用户信息
-    async removeRightById (role, id) {
+    async removeRightById(role, id) {
       // 弹框询问用户是否删除数据
       const confirmResult = await this.$confirm(
         '此操作将永久删除该用户, 是否继续?',
@@ -297,7 +297,7 @@ export default {
       role.children = res.data
       // this.getRoleList()
     },
-    async getRoleList () {
+    async getRoleList() {
       const { data: res } = await this.$http.get('roles')
       if (res.meta.status !== 200) {
         return this.$message.error('获取用户列表失败！')
