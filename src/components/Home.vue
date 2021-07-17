@@ -77,7 +77,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       // 左侧菜单数据
       menulist: [],
@@ -94,27 +94,27 @@ export default {
       activePath: ''
     }
   },
-  created () {
+  created() {
     this.getMenuList()
     this.activePath = window.sessionStorage.getItem('activePath')
     console.log('2222---', this.activePath)
   },
   methods: {
-    logout () {
+    logout() {
       window.sessionStorage.clear()
       this.$router.push('/login')
     },
     // 点击按钮，切换菜单的折叠与展开
-    toggleCollapse () {
+    toggleCollapse() {
       this.isCollapse = !this.isCollapse
     },
-    async getMenuList () {
+    async getMenuList() {
       const { data: res } = await this.$http.get('menus')
       this.menulist = res.data
       console.log('1111--', res)
     },
     // 保存链接的激活状态
-    saveNavState (activePath) {
+    saveNavState(activePath) {
       window.sessionStorage.setItem('activePath', activePath)
       this.activePath = activePath
     }
