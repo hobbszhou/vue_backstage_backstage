@@ -22,8 +22,8 @@
             <el-tag v-else type="danger">三级</el-tag>
           </template></el-table-column
         >
-      </el-table>
-    </el-card>s
+      </el-table> </el-card
+    >s
   </div>
 </template>
 
